@@ -9,6 +9,7 @@ import pandas as pd
 
 df = pd.DataFrame()
 
+#enter customer data into dataframe
 with open('customer.txt','r') as f:
     #This is to get rid of the newline character
     mylist = f.read().splitlines() 
@@ -28,6 +29,11 @@ with open('customer.txt','r') as f:
                     df.loc[linenumber,temp] = word2
         linenumber = linenumber + 1
 
+#for tracking every product being entered into dataframe
+prodlist = []
+
+
+#enter product data into dataframe
 with open('product.txt','r') as f:
     #This is to get rid of the newline character
     mylist = f.read().splitlines() 
@@ -57,11 +63,16 @@ with open('product.txt','r') as f:
                         rowIndex = df[df['CUSTOMER ID ']==CID].index[0]
                         df.loc[rowIndex,word2] = '0'
                         lastprod = word2
+                        prodlist.append(word2)
                     elif temp == ' QUANTITY ':
                         print("Going into QUANTITY")
                         rowIndex = df[df['CUSTOMER ID ']==CID].index[0]
                         df.loc[rowIndex,lastprod] = word2
         linenumber = linenumber + 1
+
+#Will fill any Nan Values that occur with 0
+for i in prodlist:
+    df[i].fillna(0,inplace=True)
 
 print(df)
 
