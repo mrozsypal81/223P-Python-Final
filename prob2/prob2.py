@@ -73,7 +73,8 @@ with open('product.txt','r') as f:
 
 #Will fill any Nan Values that occur with 0
 for i in prodlist:
-    df[i].fillna(0,inplace=True)
+    df[i].fillna(0)
+    df[i] = pd.to_numeric(df[i])
 print("++++++++++++++++++Printing Dataframe++++++++++++++++++")
 print(df)
 print("++++++++++++++++++Printing Dataframe++++++++++++++++++")
@@ -87,7 +88,6 @@ def prodcor(p1,p2):
 def prodcorgen(p1,p2):
     print("Inside prodcorgen")
     grouped = df.groupby([" GENDER "])[[p1,p2]].corr()
-    #print(grouped)
     print("The correlation between the two products based on gender is ")
     print(grouped)
 
