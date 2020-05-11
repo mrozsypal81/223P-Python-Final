@@ -67,13 +67,29 @@ with open('product.txt','r') as f:
                     elif temp == ' QUANTITY ':
                         print("Going into QUANTITY")
                         rowIndex = df[df['CUSTOMER ID ']==CID].index[0]
-                        df.loc[rowIndex,lastprod] = word2
+                        intword = int(word2)
+                        df.loc[rowIndex,lastprod] = intword
         linenumber = linenumber + 1
 
 #Will fill any Nan Values that occur with 0
 for i in prodlist:
     df[i].fillna(0,inplace=True)
-
+print("++++++++++++++++++Printing Dataframe++++++++++++++++++")
 print(df)
+print("++++++++++++++++++Printing Dataframe++++++++++++++++++")
 
 
+def prodcor(p1,p2):
+    print("Inside prodcor")
+    corr = df[p1].corr(df[p2])
+    print("The correlation between the two products is ",corr)
+
+def prodcorgen(p1,p2):
+    print("Inside prodcorgen")
+    grouped = df.groupby([" GENDER "])[[p1,p2]].corr()
+    #print(grouped)
+    print("The correlation between the two products based on gender is ")
+    print(grouped)
+
+prodcor(' prod3 ',' prod4 ')
+prodcorgen(' prod3 ',' prod4 ')
