@@ -79,17 +79,25 @@ print("++++++++++++++++++Printing Dataframe++++++++++++++++++")
 print(df)
 print("++++++++++++++++++Printing Dataframe++++++++++++++++++")
 
-
+#If the correlation is possitve and closer to 1 then it is a positive correlation
+#IF the correlation is negative closer to -1 then it is a negative correlation
+#if the correlation is close to 0 then it has no correlation
+#The data means nothing because the values are all random and made up
 def prodcor(p1,p2):
     print("Inside prodcor")
     corr = df[p1].corr(df[p2])
     print("The correlation between the two products is ",corr)
 
+#If the correlation is possitve and closer to 1 then it is a positive correlation
+#IF the correlation is negative closer to -1 then it is a negative correlation
+#if the correlation is close to 0 then it has no correlation
+#The data means nothing because the values are all random and made up
 def prodcorgen(p1,p2):
     print("Inside prodcorgen")
     grouped = df.groupby([" GENDER "])[[p1,p2]].corr()
+    #df.groupby('ID')[['Val1','Val2']].corr().iloc[0::2]['Val2']
     print("The correlation between the two products based on gender is ")
     print(grouped)
 
 prodcor(' prod3 ',' prod4 ')
-prodcorgen(' prod3 ',' prod4 ')
+prodcorgen(' prod1 ',' prod2 ')
